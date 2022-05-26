@@ -12,5 +12,5 @@ Also making a notifition via Gmail with esp32.
 7. Jumper wires
 
 ## Tutorials
-[Send emails with attachments (EMailSender v2.x library): esp32 and esp8266 – 2](https://www.mischianti.org/2020/06/16/send-email-with-attachments-emailsender-v2-x-library-esp32-and-esp8266-part-2/#ESP32)
-[How to install ESP32 and configure its development environment](https://www.mischianti.org/2020/06/16/send-email-with-attachments-emailsender-v2-x-library-esp32-and-esp8266-part-2/#ESP32)
+‧ [Send emails with attachments (EMailSender v2.x library): esp32 and esp8266 – 2](https://www.mischianti.org/2020/06/16/send-email-with-attachments-emailsender-v2-x-library-esp32-and-esp8266-part-2/#ESP32)<br>
+‧ [How to install ESP32 and configure its development environment](https://www.mischianti.org/2020/06/16/send-email-with-attachments-emailsender-v2-x-library-esp32-and-esp8266-part-2/#ESP32)
