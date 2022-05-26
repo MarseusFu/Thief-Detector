@@ -6,9 +6,15 @@
 #include "Arduino.h"
 #include <EMailSender.h>
 #include <WiFi.h>
+#include "time.h"
 
 const char* ssid = "DESKTOP-EU9UVT8 8433";
 const char* password = "12345678";
+
+const char* ntpServer = "pool.ntp.org";
+const long gmtOffset_sec = 7*3600;
+const int daylightOffset_sec = 3600;
+char timeStringBuff[50];
  
 uint8_t connection_state = 0;
 uint16_t reconnect_interval = 10000;
@@ -19,7 +25,7 @@ long adcValue = 0;
 
 boolean sendGmail();
 
-EMailSender emailSend("marseus891130@gmail.com", "rnqgmtccbicujxyz");
+EMailSender emailSend("marseus891130@gmail.com", "rnqgmtccbicujxyz","ESP32 Secure");
  
 uint8_t WiFiConnect(const char* nSSID = ssid, const char* nPassword = password)
 {
@@ -63,6 +69,19 @@ void Awaits()
         }
     }
 }
+
+void printLocalTime()
+{
+  struct tm timeinfo;
+  if(!getLocalTime(&timeinfo))
+  {
+    Serial.println("Failed to obtain time");
+    return;
+  }
+  strftime(timeStringBuff,sizeof(timeStringBuff), "%A, %B %d %Y %H:%M:%S", &timeinfo);
+  Serial.println(&timeinfo, "%A, %B %d %Y %H:%M:%S");
+}
+
 void setup() {
 //    Serial.begin(9600);
     Serial.begin(115200);
@@ -74,9 +93,10 @@ void setup() {
 //    Phpoc.begin(PF_LOG_SPI | PF_LOG_NET | PF_LOG_APP);
 //    datetime.date("Y-M-d H:i:s");
     EMailSender::EMailMessage message;
-    message.subject = "Alert! Your treasure is being taken away";
-    message.message = "Hello<br>bonjour<br>i love you";
-
+    message.subject = "Alert your treasure is being taken away";
+    String TimeString = "Time : "+String(timeStringBuff);
+    message.message = TimeString+"<br>Hello<br>bonjour<br>i love you";
+ 
 }
 
 void loop() {
