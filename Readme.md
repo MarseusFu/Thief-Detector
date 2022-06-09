@@ -1,8 +1,8 @@
 # Thief Detecter
  When your treasure is being taken away, making a Line notify(or E-mail) to let you know.
-  * Line Notify
+  * Line Notify<br>
 ![image](https://github.com/MarseusFu/Embedded-System/blob/master/line%20notify.jpg)
-  * E-mail
+  * E-mail<br>
 ![image](https://github.com/MarseusFu/Embedded-System/blob/master/Email.jpg)
 ## Components and supplies
  1. ESP 32
