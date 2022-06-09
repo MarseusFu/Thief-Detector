@@ -1,7 +1,7 @@
 # Thief Detecter
-When your treasure is being taken away, the warning lights and electric horn will let you know.<br>
-Also making a notifition via Gmail with esp32.
-
+When your treasure is being taken away, making a Line notify(or E-mail) to let you know.
+![image](https://github.com/MarseusFu/Embedded-System/blob/master/line%20notify.jpg)
+![image](https://github.com/MarseusFu/Embedded-System/blob/master/Email.jpg)
 ## Components and supplies
 1. ESP 32
 2. Force Sensor
@@ -15,6 +15,7 @@ Force Sensor
 
 GPS
 ![image](https://github.com/MarseusFu/Embedded-System/blob/master/Wiring/GPS.jpg)
-## Tutorials
+## References
 **‧** Send E-mails with ESP32 - [Link](https://www.mischianti.org/2020/06/16/send-email-with-attachments-emailsender-v2-x-library-esp32-and-esp8266-part-2/#ESP32)<br>
-**‧** ESP32 installation and configuring development environment - [Link](https://www.mischianti.org/2020/06/16/send-email-with-attachments-emailsender-v2-x-library-esp32-and-esp8266-part-2/#ESP32)
+**‧** ESP32 installation and configuring development environment - [Link](https://www.mischianti.org/2020/06/16/send-email-with-attachments-emailsender-v2-x-library-esp32-and-esp8266-part-2/#ESP32)<br>
+**‧** ESP32 - Force Sensor  - [Link](https://esp32io.com/tutorials/esp32-force-sensor)<br>
