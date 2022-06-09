@@ -3,11 +3,16 @@
 #include <WiFi.h>
 #include "time.h"
 #define FORCE_SENSOR_PIN 36 // ESP32 pin GIOP36 (ADC0): the FSR and 10K pulldown are connected to A0
-
+#include <TinyGPSPlus.h>
+#include <SoftwareSerial.h>
 //----------------------------
 const char* ssid = "DESKTOP-EU9UVT8 8433";//網路名稱
 const char* password = "12345678";//網路密碼
 String Linetoken = "yTwyxby9DPfRnwlQvkt9km4XTH5akZpSWr2NVL1IOk3";//跟LINE申請
+static const int RXPin = 16, TXPin = 17;
+static const uint32_t GPSBaud = 9600;
+TinyGPSPlus gps;// The TinyGPSPlus object
+SoftwareSerial ss(RXPin, TXPin);// The serial connection to the GPS device
 //----------------------------
 WiFiClientSecure client;//網路連線物件
 char host[] = "notify-api.line.me";//LINE Notify API網址
@@ -82,9 +87,11 @@ void printLocalTime()
 }
 
 
+
 void setup() {
   Serial.begin(9600);
-
+  ss.begin(GPSBaud);
+  
   connection_state = WiFiConnect(ssid, password);
   if(!connection_state)  // if not connected to WIFI
        Awaits();          // constantly trying to connect
@@ -97,11 +104,21 @@ void setup() {
 void loop() {
   int analogReading = analogRead(FORCE_SENSOR_PIN);
 
-  Serial.print("The force sensor value = ");
+  /*Serial.print("The force sensor value = ");
   Serial.print(analogReading); // print the raw analog reading
+  Serial.print("\n");*/
+  
+  if(ss.available()>0)
+    if(gps.encode(ss.read()))
+      displayInfo();
 
-  if (analogReading > 200)
-    Serial.println(" -> safe");
+  if(millis()>5000 && gps.charsProcessed()<10)
+  {
+    Serial.println(F("No GPS detected: check wiring."));
+  }
+  
+  if (analogReading > 0);
+  //  Serial.println(" -> safe");
   else //被拿走
   {
     //送email
@@ -110,13 +127,13 @@ void loop() {
 
     message.subject = "Alert! your treasure is being taken away";
     String TimeString = "Time : "+String(timeStringBuff);
-    message.message = TimeString+"<br>Your stuff has been taken away";
+    /*message.message = TimeString+"<br>Your stuff has been taken away";
     
     EMailSender::Response resp = emailSend.send("marseus891130@gmail.com", message);
     Serial.println("Sending status: ");
     Serial.println(resp.status);
     Serial.println(resp.code);
-    Serial.println(resp.desc);
+    Serial.println(resp.desc);*/
     //---------------------------
 
     //觸發Line Notify
@@ -149,5 +166,56 @@ void loop() {
   }
     
   //每5秒讀取一次
-  delay(5000);
+  //delay(5000);
+}
+
+void displayInfo()
+{
+  Serial.print(F("Location: ")); 
+  if (gps.location.isValid())
+  {
+    Serial.print(gps.location.lat(), 6);
+    Serial.print(F(","));
+    Serial.print(gps.location.lng(), 6);
+  }
+  else
+  {
+    Serial.print(F("INVALID"));
+  }
+
+  Serial.print(F("  Date/Time: "));
+  if (gps.date.isValid())
+  {
+    Serial.print(gps.date.month());
+    Serial.print(F("/"));
+    Serial.print(gps.date.day());
+    Serial.print(F("/"));
+    Serial.print(gps.date.year());
+  }
+  else
+  {
+    Serial.print(F("INVALID"));
+  }
+
+  Serial.print(F(" "));
+  if (gps.time.isValid())
+  {
+    if (gps.time.hour() < 10) Serial.print(F("0"));
+    Serial.print(gps.time.hour());
+    Serial.print(F(":"));
+    if (gps.time.minute() < 10) Serial.print(F("0"));
+    Serial.print(gps.time.minute());
+    Serial.print(F(":"));
+    if (gps.time.second() < 10) Serial.print(F("0"));
+    Serial.print(gps.time.second());
+    Serial.print(F("."));
+    if (gps.time.centisecond() < 10) Serial.print(F("0"));
+    Serial.print(gps.time.centisecond());
+  }
+  else
+  {
+    Serial.print(F("INVALID"));
+  }
+
+  Serial.println();
 }
