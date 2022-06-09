@@ -18,10 +18,10 @@
  * GPS
 ![image](https://github.com/MarseusFu/Embedded-System/blob/master/Wiring/GPS.jpg)
 
-## Further improvement
- Force sensor感測不穩定，誤觸可能導致讀取數值錯誤，以為東西被拿走了。
- GPS模組要在室外取得位置的能力較佳，在室內啟動來取得位置需很長時間，原因是室內有遮蔽物所以很難讀取到衛星訊號，且若模組沒電了，過往讀取紀錄消失，下次取得位置又要花很長時間。
- GPS功能雞肋，目前作法只是取得失竊位置，若可以裝在物品上，於失竊後追蹤其位置更有實際效用。
+## 待改進
+ * Force sensor感測不穩定，誤觸可能導致讀取數值錯誤，以為東西被拿走了。
+ * GPS模組要在室外取得位置的能力較佳，在室內啟動來取得位置需很長時間，原因是室內有遮蔽物所以很難讀取到衛星訊號，且若模組沒電了，過往讀取紀錄消失，下次取得位置又要花很長時間。
+ * GPS功能雞肋，目前作法只是取得失竊位置，若可以裝在物品上，於失竊後追蹤其位置更有實際效用。
 
 ## References
  * Send E-mails with ESP32 - [Link](https://www.mischianti.org/2020/06/16/send-email-with-attachments-emailsender-v2-x-library-esp32-and-esp8266-part-2/#ESP32)<br>
