@@ -1,5 +1,6 @@
 # Thief Detecter
- When your treasure is being taken away, making a Line notify(or E-mail) to let you know.
+ When your treasure is being taken away, making a Line notify(or E-mail) to let you know.<br>
+ You also get your location info on the arduino ide screen.<br>
   * Line Notify<br>
 ![image](https://github.com/MarseusFu/Embedded-System/blob/master/line%20notify.jpg)
   * E-mail<br>
