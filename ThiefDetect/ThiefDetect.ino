@@ -8,7 +8,7 @@
 //----------------------------
 const char* ssid = "DESKTOP-EU9UVT8 8433";//網路名稱
 const char* password = "12345678";//網路密碼
-String Linetoken = "yTwyxby9DPfRnwlQvkt9km4XTH5akZpSWr2NVL1IOk3";//跟LINE申請
+String Linetoken = "YOUR LINE TOKEN";//跟LINE申請
 static const int RXPin = 16, TXPin = 17;
 static const uint32_t GPSBaud = 9600;
 TinyGPSPlus gps;// The TinyGPSPlus object
